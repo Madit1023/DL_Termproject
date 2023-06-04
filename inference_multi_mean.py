@@ -21,14 +21,14 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # Define the data transforms
 transform_ten = transforms.Compose([
     transforms.Resize(256),
-    transforms.GaussianBlur(5,1),
+    transforms.GaussianBlur(3,1),
     transforms.TenCrop(224),
     transforms.Lambda(lambda crops: torch.stack([transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))(transforms.ToTensor()(crop)) for crop in crops]))
     ])
 
 transform_test = transforms.Compose([
     transforms.Resize(256),
-    transforms.GaussianBlur(5,1),
+    transforms.GaussianBlur(3,1),
     transforms.CenterCrop(224),
     transforms.ToTensor(),
     transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
